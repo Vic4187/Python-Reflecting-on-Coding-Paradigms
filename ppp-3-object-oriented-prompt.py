@@ -12,37 +12,33 @@ class Podracer:
   def repair(self):
     self.condition = "repaired"
 
-pod1 = Podracer(500, 'perfect', 10000)
-print(pod1.max_speed, pod1.condition, pod1.price)  # Output: 500 perfect 10000
+pod = Podracer(500, 'trashed', 10000)
+pod.repair()
+print(pod.condition)  # Output: "repaired"
 
 
 # Define a new class, AnakinsPod that inherits the Podracer class, but also contains a special method called boost that will multiply max_speed by 2.
 class AnakinsPod(Podracer):
-  def __init__(self, max_speed, condition, price):
-    super.init(max_speed, condition, price)
+    # Method to boost the speed
+    def boost(self):
+        self.max_speed *= 2
 
-  def boost(self):
-    self.max_speed *= 2
+# Example usage
+new_pod = AnakinsPod(2, 'perfect', 15000)
+new_pod.boost()
+print(new_pod.max_speed)  # Output: 4
 
-anakin_pod = AnakinsPod(600, 'perfect', 15000)
-print(anakin_pod.max_speed, anakin_pod.condition, anakin_pod.price)  # Output: 600 perfect 15000
-
-anakin_pod.boost()
-print(anakin_pod.max_speed)  # Output: 1200
 
 # Define another class that inherits Podracer and call this one SebulbasPod.
 # This class should have a special method called flame_jet that will update the condition of another podracer to "trashed".
 class SebulbasPod(Podracer):
-#   def __init__(self, max_speed, condition, price):
-#     super.init(max_speed, condition, price):
+    # Method to trash another podracer's condition
+    def flame_jet(self, other):
+        other.condition = "trashed"
 
-  def flame_jet(self,other):
-    other.condition = "trashed"
-
-sebulba_pod = SebulbasPod(550, 'perfect', 13000)
-print(sebulba_pod.max_speed, sebulba_pod.condition, sebulba_pod.price)  # Output: 550 perfect 13000
-
-sebulba_pod.flame_jet(pod1)
-print(pod1.condition)  # Output: trashed
-
+# Example usage
+third_pod = SebulbasPod(550, 'perfect', 13000)
+another_pod = Podracer(400, 'perfect', 12000)
+third_pod.flame_jet(another_pod)
+print(another_pod.condition)  # Output: "trashed"
 
